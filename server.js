@@ -3,7 +3,7 @@ const figlet = require('figlet');
 const { getUser } = require('./database');  // Asumimos que este módulo está implementado
 const crypto = require('crypto');
 const app = express();
-const port = 3000;
+const port = 7000;
 
 const realm = 'User Visible Realm';
 

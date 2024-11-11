@@ -21,7 +21,7 @@
 
     <script>
         
-        fetch('http://localhost:3000/fonts')
+        fetch('http://localhost:7000/fonts')
             .then(response => response.json())
             .then(fonts => {
                 const fontSelect = document.getElementById('font');
@@ -42,7 +42,7 @@
 
             const text = document.getElementById('text').value;
             const font = document.getElementById('font').value;
-            const url = `http://localhost:3000/convert?text=${encodeURIComponent(text)}&font=${encodeURIComponent(font)}`;
+            const url = `http://localhost:7000/convert?text=${encodeURIComponent(text)}&font=${encodeURIComponent(font)}`;
 
             fetch(url)
                 .then(response => response.text())
