@@ -6,7 +6,7 @@
     <title>Figlet</title>
 </head>
 <body>
-    <h1>Elige la fuente y mira la sorpresa!</h1>
+    <h1>Elige la fuente</h1>
 
     <form id="textForm">
         <label for="text">Texto:</label>
@@ -17,11 +17,16 @@
         
         <button type="submit">Convertir</button>
     </form>
+    <ul>
+        <li>
+            <a href="/logout">Cerrar Sesion</a>
+        </li>
+    </ul>
     <pre id="figletOutput"></pre>
 
     <script>
         
-        fetch('http://localhost:7000/fonts')
+        fetch('http://localhost:3000/fonts')
             .then(response => response.json())
             .then(fonts => {
                 const fontSelect = document.getElementById('font');
@@ -42,7 +47,7 @@
 
             const text = document.getElementById('text').value;
             const font = document.getElementById('font').value;
-            const url = `http://localhost:7000/convert?text=${encodeURIComponent(text)}&font=${encodeURIComponent(font)}`;
+            const url = `http://localhost:3000/convert?text=${encodeURIComponent(text)}&font=${encodeURIComponent(font)}`;
 
             fetch(url)
                 .then(response => response.text())

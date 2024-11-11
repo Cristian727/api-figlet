@@ -31,6 +31,7 @@ function createUser(user, password) {
     insertUserStatement.run(user, hash);
 };
 
+//busca el usuario en la bbdd y compruebo si coinciden
 function getUser(user) {
     const getUserStatement = db.prepare("SELECT * FROM users WHERE user = ?");
     return getUserStatement.get(user);
