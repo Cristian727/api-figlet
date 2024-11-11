@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figlet</title>
+</head>
+<body>
+    <h1>Elige la fuente y mira la sorpresa!</h1>
+
+    <form id="textForm">
+        <label for="text">Texto:</label>
+        <input type="text" id="text" name="text" required>
+        
+        <label for="font">Fuente:</label>
+        <select id="font" name="font"></select>
+        
+        <button type="submit">Convertir</button>
+    </form>
+    <pre id="figletOutput"></pre>
+
+    <script>
+        
+        fetch('http://localhost:3000/fonts')
+            .then(response => response.json())
+            .then(fonts => {
+                const fontSelect = document.getElementById('font');
+                fonts.forEach(font => {
+                    const option = document.createElement('option');
+                    option.value = font;
+                    option.text = font;
+                    fontSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error cargando fuentes:', error);
+            });
+
+        // Enviar texto y fuente seleccionada al servidor
+        document.getElementById('textForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            const text = document.getElementById('text').value;
+            const font = document.getElementById('font').value;
+            const url = `http://localhost:3000/convert?text=${encodeURIComponent(text)}&font=${encodeURIComponent(font)}`;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('figletOutput').innerText = data;
+                })
+        };
+    </script>
+</body>
+</html>
